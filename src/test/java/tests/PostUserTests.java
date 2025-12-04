@@ -14,6 +14,10 @@ import static org.hamcrest.Matchers.is;
 
 public class PostUserTests extends TestBase {
 
+    public static final String validRegisterData = "{\"email\": \"charles.morris@reqres.in\", \"password\": \"testest\"}";
+    public static final String validCreateData = "{\"name\": \"Mark\", \"job\": \"QA\"}";
+    public static final String inValidRegisterData = "{\"email\": \"charles.morris@reqres.in\", \"password\": \"\"}";
+
     @Test
     @Description("Отправка POST запроса и создание пользователя")
     @DisplayName("Проверка успешного создания нового пользователя")
@@ -21,7 +25,7 @@ public class PostUserTests extends TestBase {
         given()
                 .log().all()
                 .contentType(ContentType.JSON)
-                .body(Constants.validCreateData)
+                .body(validCreateData)
                 .when()
                 .post(UserEndpoints.CREATE_USER.getEndpoint())
                 .then()
@@ -38,7 +42,7 @@ public class PostUserTests extends TestBase {
         given()
                 .log().all()
                 .contentType(ContentType.JSON)
-                .body(Constants.validRegisterData)
+                .body(validRegisterData)
                 .when()
                 .post(UserEndpoints.REGISTER_USER.getEndpoint())
                 .then()
@@ -57,7 +61,7 @@ public class PostUserTests extends TestBase {
         given()
                 .log().all()
                 .contentType(ContentType.JSON)
-                .body(Constants.inValidRegisterData)
+                .body(inValidRegisterData)
                 .when()
                 .post(UserEndpoints.REGISTER_USER.getEndpoint())
                 .then()
